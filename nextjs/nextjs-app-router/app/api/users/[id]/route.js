@@ -4,14 +4,16 @@ import newrelic from 'newrelic'
 import getDatabase from '../../../../lib/database'
 
 export async function GET(req, { params }) {
+  const { id } = await params
   const db = await getDatabase()
-  const user = db.userById(params.id)
+  const user = db.userById(id)
   return NextResponse.json(user)
 }
 
 export async function POST(req, { params }) {
+  const { id } = await params
   const db = await getDatabase()
-  const dbUser = db.userById(params.id)
+  const dbUser = db.userById(id)
 
   if (!dbUser) {
     // We're trying to edit a non-existing user. This seems like

@@ -2,16 +2,18 @@
 
 // See https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect
 // See https://react.dev/reference/react/useState
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { notFound } from 'next/navigation'
 
 export default function Page({ params }) {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
+  const { id } = React.use(params);
+
   const [errorState, setErrorState] = useState(null)
   useEffect(() => {
     fetch(
-        `/api/users/${params.id}`,
+        `/api/users/${id}`,
         { method: 'GET' }
       )
       .then(r => r.json())
