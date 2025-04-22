@@ -3,12 +3,10 @@
 const nrExternals = require('newrelic/load-externals')
 
 module.exports = {
-  experimental: {
-    // Without this setting, the Next.js compilation step will routinely
-    // try to import files such as `LICENSE` from the `newrelic` module.
-    // See https://nextjs.org/docs/app/api-reference/next-config-js/serverComponentsExternalPackages.
-    serverComponentsExternalPackages: ['newrelic']
-  },
+  // Without this setting, the Next.js compilation step will routinely
+  // try to import files such as `LICENSE` from the `newrelic` module.
+  // See https://nextjs.org/docs/app/api-reference/next-config-js/serverComponentsExternalPackages.
+  serverExternalPackages: ["newrelic"],
 
   // In order for newrelic to effectively instrument a Next.js application,
   // the modules that newrelic supports should not be mangled by webpack. Thus,
