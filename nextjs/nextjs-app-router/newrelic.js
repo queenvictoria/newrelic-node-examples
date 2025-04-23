@@ -31,6 +31,11 @@ exports.config = {
      */
     level: 'trace'
   },
+  browser_monitoring : {
+    attributes: {
+      enabled: true,
+    },
+  },
 
   /**
    * When true, all request headers except for those listed in attributes.exclude

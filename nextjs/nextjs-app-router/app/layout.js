@@ -22,6 +22,14 @@ export default async function RootLayout({ children }) {
     allowTransactionlessInjection: true,
   })
 
+  if (typeof newrelic == 'object') {
+    newrelic.addCustomAttribute("languageId", "TEST");
+    newrelic.addCustomAttributes({
+      serviceId: "TEST",
+      userId: "TEST",
+    });
+  }
+
   return (
     <html>
     <body>

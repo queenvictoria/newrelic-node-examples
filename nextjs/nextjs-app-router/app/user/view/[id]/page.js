@@ -1,4 +1,5 @@
 // See https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
+import newrelic from "newrelic";
 
 import logger from '../../../../lib/logger.js'
 import getDatabase from '../../../../lib/database.js'
@@ -12,6 +13,9 @@ export default async function Page({ params }) {
   const db = await getDatabase()
   const user = db.userById(id)
 
+  newrelic.addCustomAttribute("userId", id);
+
+  logger.info('user page params: %s', JSON.stringify(params, null, 2))
   if (user === undefined) {
     logger.error('cannot find user with id: %s', id)
     return notFound()
