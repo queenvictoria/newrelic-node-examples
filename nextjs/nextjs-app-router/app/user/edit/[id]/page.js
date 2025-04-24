@@ -1,4 +1,10 @@
 'use client'
+// Using this in use client throws the LICENCE error
+// import newrelic from "newrelic";
+// import newrelic from "newrelic/esm-loader.mjs"
+import dynamic from 'next/dynamic'
+const newrelic = dynamic(() => import("newrelic/esm-loader.mjs"), { ssr: false })
+
 
 // See https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect
 // See https://react.dev/reference/react/useState
@@ -9,6 +15,10 @@ export default function Page({ params }) {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
   const { id } = React.use(params);
+
+  if (typeof newrelic == 'object') {
+    newrelic.addCustomAttribute("userId", id);
+  }
 
   const [errorState, setErrorState] = useState(null)
   useEffect(() => {
