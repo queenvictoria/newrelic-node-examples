@@ -1,19 +1,20 @@
 'use client'
-// If instrumenting client pages, do not import or require the New Relic APM agent. 
-// Instead, use the New Relic Browser agent to instrument client pages. See below. 
+// If instrumenting client pages, do not import or require the New Relic APM agent.
+// Instead, use the New Relic Browser agent to instrument client pages. See below.
 
 // See https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect
 // See https://react.dev/reference/react/useState
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { notFound } from 'next/navigation'
 
 export default function Page({ params }) {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
   const [errorState, setErrorState] = useState(null)
+  const { id } = React.use(params)
   useEffect(() => {
     fetch(
-        `/api/users/${params.id}`,
+        `/api/users/${id}`,
         { method: 'GET' }
       )
       .then(r => r.json())
@@ -22,7 +23,7 @@ export default function Page({ params }) {
         setLoading(false)
       })
     }
-    , [])
+    , [id])
 
   if (isLoading === true) return <p>Loading...</p>
   if (!user) return notFound()

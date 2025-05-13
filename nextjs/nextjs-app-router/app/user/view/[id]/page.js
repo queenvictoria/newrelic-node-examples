@@ -8,8 +8,9 @@ import { notFound } from 'next/navigation'
 
 export default async function Page({ params }) {
   logger.info('rendering user page')
+  const { id } = await params
   const db = await getDatabase()
-  const user = db.userById(params.id)
+  const user = db.userById(id)
 
   if (user === undefined) {
     logger.error('cannot find user with id: %s', params.id)

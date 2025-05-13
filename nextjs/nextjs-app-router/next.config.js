@@ -8,7 +8,7 @@ module.exports = {
     // Without this setting, the Next.js compilation step will routinely
     // try to import files such as `LICENSE` from the `newrelic` module.
     // See https://nextjs.org/docs/app/api-reference/next-config-js/serverComponentsExternalPackages.
-    serverComponentsExternalPackages: ['newrelic']
+    // serverComponentsExternalPackages: ['newrelic']
   },
   
   // In Next15, server external packages are no longer experimental, this property is renamed serverExternalPackages. 
